@@ -25,9 +25,9 @@ class MainViewModel(
     fun getExchangeValue(coins: String) {
         viewModelScope.launch {
             getExchangeValueUseCase(coins)
-                .flowOn(Dispatchers.Main)
+                .flowOn(Dispatchers.Main) //Sempre que for iniciado ele vai cair no onStart
                 .onStart {
-                    _state.value = State.Loading
+                    _state.value = State.Loading //Carrega a barra de progresso
                 }
                 .catch {
                     _state.value = State.Error(it)
@@ -38,6 +38,7 @@ class MainViewModel(
         }
     }
 
+    //
     fun saveExchange(exchange: ExchangeResponseValue) {
         viewModelScope.launch {
             saveExchangeUseCase(exchange)
@@ -54,6 +55,7 @@ class MainViewModel(
         }
     }
 
+    //Classe criada apenas para representar os 3 estados tratados no data
     sealed class State {
         object Loading: State()
         object Saved: State()

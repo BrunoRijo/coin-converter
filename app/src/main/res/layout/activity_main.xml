@@ -27,6 +27,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/layout_extra_padding" />
 
+    <!-- TextInput que recebe o valor -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_value"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -45,6 +46,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- DropdownMenu CONVERTER DE -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_from"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -66,6 +68,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- DropdownMenu PARA -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_to"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -86,6 +89,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Botao CONVERTER -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_converter"
         android:layout_width="0dp"
@@ -97,6 +101,7 @@
         app:layout_constraintStart_toStartOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/til_from" />
 
+    <!-- Botao SALVAR -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save"
         android:layout_width="0dp"
@@ -107,6 +112,7 @@
         app:layout_constraintStart_toStartOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/btn_converter" />
 
+    <!-- TextView de Exibição do Resultado -->
     <TextView
         android:id="@+id/tv_result"
         android:layout_width="wrap_content"

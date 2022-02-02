@@ -12,6 +12,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun exchangeDao(): ExchangeDao
 
+    //Cria a instancia do banco de dados
     companion object {
         fun getInstance(context: Context): AppDatabase {
             return Room.databaseBuilder(

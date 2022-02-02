@@ -12,7 +12,7 @@ object DomainModule {
     fun load() {
         loadKoinModules(useCaseModules())
     }
-
+    //Resposnsável pos buscar os dados no modulo de data
     private fun useCaseModules(): Module {
         return module {
             factory { ListExchangeUseCase(get()) }

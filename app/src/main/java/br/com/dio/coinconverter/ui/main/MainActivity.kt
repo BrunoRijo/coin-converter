@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<MainViewModel>()
     private val dialog by lazy { createProgressDialog() }
+    //by lazy faz com que a variavel seja criada somente quand for chamada
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    // Preenche os DropDownMenu's com uma lista de Coins
     private fun bindAdapters() {
         val list = Coin.values()
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, list)
@@ -55,11 +57,14 @@ class MainActivity : AppCompatActivity() {
         binding.tvFrom.setAdapter(adapter)
         binding.tvTo.setAdapter(adapter)
 
-        binding.tvFrom.setText(Coin.USD.name, false)
+        binding.tvFrom.setText(Coin.USD.name, false) //Deixando valores pré-selecionados
         binding.tvTo.setText(Coin.BRL.name, false)
     }
 
     private fun bindListeners() {
+        /*A func .doAfterTextChanged é um observer que vai ter uma ação quando houver alguma mudança
+        Nesse caso vai tornar o botão Converter "enabled" quando tv de VALOR tiver
+         algum valor inserido*/
         binding.tilValue.editText?.doAfterTextChanged {
             binding.btnConverter.isEnabled = it != null && it.toString().isNotEmpty()
             binding.btnSave.isEnabled = false

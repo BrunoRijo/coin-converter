@@ -13,11 +13,12 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        //Informa que a aplicação vai usar o Koin
         startKoin {
             androidContext(this@App)
         }
 
-        DataModules.load()
+        DataModules.load() //Carrega os DataModules, que vai trazer todas as configurações de network
         DomainModule.load()
         PresentationModule.load()
     }

@@ -19,6 +19,7 @@ object DataModules {
 
     private const val HTTP_TAG = "OhHttp"
 
+    //Essa função é responsável por carregar todos os módulos do Data
     fun load() {
         loadKoinModules(networkModule() + repositoryModule() + databaseModule())
     }
@@ -26,25 +27,32 @@ object DataModules {
     private fun networkModule(): Module {
         return module {
             single {
+
+                //HttpLoggingInterceptor serve para visualizar o que o retrofit está fazendo
                 val interceptor = HttpLoggingInterceptor {
                     Log.e(HTTP_TAG, ": $it")
                 }
+                //Irá imprimir tudo que estiver no Body
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
 
+                //Esse será o retorno
                 OkHttpClient.Builder()
                     .addInterceptor(interceptor)
                     .build()
             }
 
+            //Usará o Gson para converter a string em Objetos
             single {
                 GsonConverterFactory.create(GsonBuilder().create())
             }
 
+            //Cria os services, que são as definições do EndPoint definidas na interface AwesomeService
             single {
                 createService<AwesomeService>(get(), get())
             }
         }
     }
+
 
     private fun repositoryModule(): Module {
         return module {
@@ -52,12 +60,14 @@ object DataModules {
         }
     }
 
+    //Sempre que alguém precisar de uma instancia de CoinRepository, ele retornará esse valor
     private fun databaseModule(): Module {
         return module {
             single { AppDatabase.getInstance(androidApplication()) }
         }
     }
 
+    //Cria um service, utilizando retrofit aqui
     private inline fun <reified T> createService(client: OkHttpClient, factory: GsonConverterFactory): T {
         return Retrofit.Builder()
             .baseUrl("https://economia.awesomeapi.com.br")
